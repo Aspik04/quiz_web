@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz Website</title>
+    <link rel="shortcute icon" href="kitap.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 0;
+            margin:0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .question {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h1>Жабық тест</h1>
+    <div id="quiz"></div>
+    <button onclick="checkAnswers()">Жауап беру</button>
+
+    <script>
+        var questions = [
+            { 
+                question: "1.TCP/ІР хаттамасының стектері неше деңгейге бөлінеді?", 
+                answers: ["3", "2", "4", "5"], 
+                correctAnswer: "4" 
+            },
+            { 
+                question: "2.OSI моделінің деңгейлерің дұрыс тәртіппен көрсетіңіз", 
+                answers: ["1- мәліметтерді ұсыну деңгейі, 2- транспорттық, 3- қолданбалы, 4-каналдық, 5-сеанстық, 6- физикалық, 7-желілік", 
+                "1- мәліметтерді ұсыну деңгейі, 2-каналдық, 3- қолданбалы, 4-транспорттық, 5-сеанстық, 6- физикалық, 7-желілік", 
+                "1-физикалық, 2-каналдық, 3- қолданбалы, 4-транспорттық, 5-сеанстық, 6- мәліметтерді ұсыну деңгейі, 7-желілік", 
+                "1-физикалық, 2-каналдық, 3-желілік, 4-транспорттық, 5-сеанстық, 6- мәліметтерді ұсыну деңгейі, 7-қолданбалы"], 
+                correctAnswer: "1-физикалық, 2-каналдық, 3-желілік, 4-транспорттық, 5-сеанстық, 6- мәліметтерді ұсыну деңгейі, 7-қолданбалы" 
+            },
+            { 
+                question: "3. Хаттаманың анықтамасы:", 
+                answers: ["бір деңгей аймағындағы жүйелер арасында мәлімет алмасу әрекеттерін анықтау ережелері",
+                 "төменгі деңгейдің жоғарғы деңгейге бере алатын функциялар жиыны",
+                  "бұл жүйелерді байланыстыруды ұйымдастыруға қажетті әр түрлі деңгейдегі хаттамалар жиыны", 
+                  "жоғарғы деңгейдің төменгі деңгейге бере алатын функциялар жиыны"], 
+                correctAnswer: "бұл жүйелерді байланыстыруды ұйымдастыруға қажетті әр түрлі деңгейдегі хаттамалар жиыны" 
+            },
+            { 
+                question: "4. HTML тілінің бастапқы берілген символдық мәтінді белгілейтін командалары қалай аталады?", 
+                answers: ["айнымалы", "жол", "белгі немесе тэг", "класс"], 
+                correctAnswer: "белгі немесе тэг" 
+            },
+            { 
+                question: "5. Азат жолдан бастауға арналған тэг?", 
+                answers: ["H1", "H3", "P", "STRONG"], 
+                correctAnswer: "P" 
+            },
+            { 
+                question: "6. Мәтінді ортаға қарай туралауға қолданатын тэг:", 
+                answers: ["ALІGN=CENTER", "ALІGN=RIGHT", "ALІGN=LEFT", "CENTER/CENTER"], 
+                correctAnswer: "ALІGN=CENTER" 
+            },
+            { 
+                question: "7. Құжаттың жалпы мәтінінің фон түсін анықтын тэг:", 
+                answers: ["BGCOLOR", "TEXT", "VLІNK", "BACKGROUND"], 
+                correctAnswer: "BGCOLOR" 
+            },
+            { 
+                question: "8. Төменде келтірілген стильдік сипаттамалардың қайсысы қатесіз жазылған? ", 
+                answers: ["Р {color = red; font-size=l cm}", "Р {color = red, font-size=l cm}", "Р {color:red font-size:1 cm}", "P {color:red; font-size:1cm}"], 
+                correctAnswer: "P {color:red; font-size:1cm}" 
+            },
+            { 
+                question: "9. Айнымалылар не үшін қолданылады:", 
+                answers: ["Ақпаратты өңдеу үшін", "Ақпаратты сақтау үшін", "Программа жазу үшін", "Функция жазу үшін"], 
+                correctAnswer: "Ақпаратты сақтау үшін" 
+            },
+            { 
+                question: "10. Мұралау деген не :", 
+                answers: ["Ақпаратты негіздеу", "Белгілі бір ереже бойынша тәсілдері орнату", "Объектілер арасында қасиеттерді алмастыру", "Объектіның негізінде жаңа объектінің барлық қасиеттері мен тәсілдерін мұра ретінде қабылдауы"], 
+                correctAnswer: "Объектіның негізінде жаңа объектінің барлық қасиеттері мен тәсілдерін мұра ретінде қабылдауы" 
+            }
+        ];
+
+        function showQuestions() {
+            var quizDiv = document.getElementById('quiz');
+            for(var i = 0; i < questions.length; i++) {
+                var questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = '<p>' + questions[i].question + '</p>';
+                for(var j = 0; j < questions[i].answers.length; j++) {
+                    questionDiv.innerHTML += '<input type="radio" name="q' + i + '" value="' + questions[i].answers[j] + '"> ' + questions[i].answers[j] + '<br>';
+                }
+                quizDiv.appendChild(questionDiv);
+            }
+        }
+
+        function checkAnswers() {
+            var correct = 0;
+            for(var i = 0; i < questions.length; i++) {
+                var answers = document.getElementsByName('q' + i);
+                for(var j = 0; j < answers.length; j++) {
+                    if(answers[j].checked && answers[j].value == questions[i].correctAnswer) {
+                        correct++;
+                    }
+                }
+            }
+            alert('Сіз ' + questions.length + ' сұрақтан ' + correct + ' дұрыс жауап бердіңіз!');
+        }
+
+        showQuestions();
+    </script>
+</div>
+</body>
+</html>
